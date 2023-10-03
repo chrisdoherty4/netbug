@@ -25,7 +25,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 
-PS1="\[\033[01;38;5;26m\]\W\[$(tput sgr0)\] \[\033[38;5;242m\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
+PS1="\[\033[01;36m\]($HOSTNAME) \[\033[01;38;5;26m\]\W\[$(tput sgr0)\] \[\033[38;5;242m\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
 
 if [ -n "$SSH_CLIENT" ]; then
     PS1="\[\e[0;32m\][\H]\[$(tput srg0)\] $PS1"
