@@ -1,3 +1,3 @@
-# netdebug
+# Netbug
 
-Based on netshoot with some changes to default to bash and install additional tooling.
+Based on netshoot with some modifications.

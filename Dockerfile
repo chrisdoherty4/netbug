@@ -91,7 +91,7 @@ COPY --from=fetcher /tmp/fortio /usr/local/bin/fortio
 # Setting User and Home
 USER root
 WORKDIR /root
-ENV HOSTNAME netdebug
+ENV HOSTNAME netbug
 
 # Bash customization
 COPY bashrc .bashrc

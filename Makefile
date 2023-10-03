@@ -1,7 +1,7 @@
 .PHONY: build-x86 build-arm64 push all
 
 # Build Vars
-IMAGENAME=chrisdoherty4/netdebug
+IMAGENAME=chrisdoherty4/netbug
 VERSION=0.1
 
 
