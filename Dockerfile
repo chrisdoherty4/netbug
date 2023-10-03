@@ -2,8 +2,8 @@ FROM debian:stable-slim as fetcher
 COPY build/fetch_binaries.sh /tmp/fetch_binaries.sh
 
 RUN apt-get update && apt-get install -y \
-  curl \
-  wget
+    curl \
+    wget
 
 RUN /tmp/fetch_binaries.sh
 
@@ -58,7 +58,6 @@ RUN set -ex \
     socat \
     speedtest-cli \
     openssh \
-    oh-my-zsh \
     strace \
     tcpdump \
     tcptraceroute \
@@ -70,7 +69,9 @@ RUN set -ex \
     websocat \
     swaks \
     perl-crypt-ssleay \
-    perl-net-ssleay
+    perl-net-ssleay \
+    bash \
+    dhclient
 
 # Installing ctop - top-like container monitor
 COPY --from=fetcher /tmp/ctop /usr/local/bin/ctop
@@ -90,13 +91,10 @@ COPY --from=fetcher /tmp/fortio /usr/local/bin/fortio
 # Setting User and Home
 USER root
 WORKDIR /root
-ENV HOSTNAME netshoot
+ENV HOSTNAME netdebug
 
-# ZSH Themes
-RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-COPY zshrc .zshrc
+# Bash customization
+COPY bashrc .bashrc
 COPY motd motd
 
 # Fix permissions for OpenShift and tshark
@@ -104,4 +102,4 @@ RUN chmod -R g=u /root
 RUN chown root:root /usr/bin/dumpcap
 
 # Running ZSH
-CMD ["zsh"]
+CMD ["bash"]
